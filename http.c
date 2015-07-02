@@ -151,7 +151,7 @@ void free_http_client(struct HttpClient *httpc)
 }
 
 struct HttpRequest *new_http_request(const char *url,
-    void (*callback)(struct HttpRequest *req, struct HttpResponse *resp, void *arg), void *cb_arg)
+    void (*callback)(struct HttpRequest *req, struct HttpResponse *resp, void *arg), void *cb_arg, char *data)
 {
     struct HttpRequest *req;
 
@@ -172,6 +172,11 @@ struct HttpRequest *new_http_request(const char *url,
     curl_easy_setopt(req->easy, CURLOPT_ERRORBUFFER, req->error);
     curl_easy_setopt(req->easy, CURLOPT_PRIVATE, req);
     curl_easy_setopt(req->easy, CURLOPT_NOSIGNAL, 1L);
+    if (data)
+    {
+    	curl_easy_setopt(req->easy, CURLOPT_POSTFIELDS, data);
+        curl_easy_setopt(req->easy, CURLOPT_POSTFIELDSIZE, (long)strlen(data));
+    }
 
     return req;
 }

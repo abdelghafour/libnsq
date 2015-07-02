@@ -33,3 +33,5 @@ install:
 	install -m 755 -d ${DESTDIR}${LIBDIR}
 	install -m 755 libnsq.a ${DESTDIR}${LIBDIR}/libnsq.a
 	install -m 755 nsq.h ${DESTDIR}${INCDIR}/nsq.h
+	install -m 755 nsq.h ${DESTDIR}${INCDIR}/http.h
+	install -m 755 nsq.h ${DESTDIR}${INCDIR}/utlist.h
